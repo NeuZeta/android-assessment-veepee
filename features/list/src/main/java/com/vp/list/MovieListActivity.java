@@ -1,12 +1,9 @@
 package com.vp.list;
 
-import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -72,6 +69,15 @@ public class MovieListActivity extends AppCompatActivity implements HasSupportFr
             }
         });
 
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                ListFragment listFragment = (ListFragment) getSupportFragmentManager().findFragmentByTag(ListFragment.TAG);
+                listFragment.submitSearchQuery("Interview");
+                return true;
+            }
+        });
+
         return true;
     }
 
@@ -86,7 +92,6 @@ public class MovieListActivity extends AppCompatActivity implements HasSupportFr
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingActivityInjector;
     }
-
 
 
 }

@@ -166,10 +166,18 @@ public class ListFragment extends Fragment implements GridPagingScrollListener.L
 
     @Override
     public void onItemClick(String imdbID) {
-
         String url = "app://movies/detail?imdbID=" + imdbID;
-
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
+                getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 2 : 3);
+        recyclerView.setLayoutManager(layoutManager);
+
+    }
+
 }

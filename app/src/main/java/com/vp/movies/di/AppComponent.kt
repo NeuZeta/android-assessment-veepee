@@ -1,6 +1,7 @@
 package com.vp.movies.di
 
 import android.app.Application
+import androidx.annotation.Keep
 import com.vp.detail.di.DetailActivityModule
 import com.vp.list.di.MovieListActivityModule
 import com.vp.movies.MoviesApplication

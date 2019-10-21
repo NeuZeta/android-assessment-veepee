@@ -21,7 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 # Retrofit does reflection on generic parameters and InnerClass is required to use Signature.
--keepattributes Signature, InnerClasses
+-keepattributes *Annotation*, Signature, InnerClasses
 
 # Retain service method parameters when optimizing.
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
@@ -45,3 +45,7 @@
 
 # OkHttp platform used only on JVM and when Conscrypt dependency is available.
 -dontwarn okhttp3.internal.platform.ConscryptPlatform
+
+# Kotlin
+-keep class kotlin.** { *; }
+-keep class org.jetbrains.** { *; }

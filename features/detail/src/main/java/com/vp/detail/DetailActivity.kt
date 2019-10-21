@@ -12,8 +12,6 @@ import com.vp.detail.viewmodel.DetailsViewModel
 import com.vp.favorites.SharedPreference
 import com.vp.favorites.model.FavoriteMovie
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_detail.*
-import java.security.AccessController.getContext
 import javax.inject.Inject
 import kotlin.run
 

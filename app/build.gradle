@@ -25,6 +25,7 @@ android {
             initWith buildTypes.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             minifyEnabled true
+            shrinkResources true
         }
     }
 
@@ -43,7 +44,6 @@ dependencies {
     implementation project(':features:detail')
     implementation project(':features:favorites')
     implementation project(':dagger.addons')
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlin"
 
     //support

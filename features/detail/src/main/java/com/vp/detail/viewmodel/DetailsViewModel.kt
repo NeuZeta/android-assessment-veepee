@@ -1,5 +1,6 @@
 package com.vp.detail.viewmodel
 
+import androidx.annotation.Keep
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,7 @@ import retrofit2.Response
 import javax.inject.Inject
 import javax.security.auth.callback.Callback
 
+@Keep
 class DetailsViewModel @Inject constructor(private val detailService: DetailService) : ViewModel() {
 
     private val details: MutableLiveData<MovieDetail> = MutableLiveData()
@@ -43,6 +45,7 @@ class DetailsViewModel @Inject constructor(private val detailService: DetailServ
         })
     }
 
+    @Keep
     enum class LoadingState {
         IN_PROGRESS, LOADED, ERROR
     }

@@ -7,6 +7,8 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,29 +43,38 @@ public class FavoriteListFragment extends Fragment {
     }
 
 
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sharedPreference = new SharedPreference();
+    }
+
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_favorite_list, container, false);
+        return inflater.inflate(R.layout.fragment_favorite_list, container, false);
+    }
 
-        sharedPreference = new SharedPreference();
-        favorites = sharedPreference.getFavorites(getContext());
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.idFavList);
         viewAnimator = view.findViewById(R.id.viewAnimator);
         noFavsTextView = view.findViewById(R.id.noFavoritesText);
 
-        if (favorites == null || favorites.isEmpty()) {
-            showNoFavsMessage();
-        } else {
+        initList();
+        handleResult();
+    }
 
-            if (favorites.size() == 0) {
-                showNoFavsMessage();
-            }
+    @Override
+    public void onResume() {
+        super.onResume();
+        initList();
+        handleResult();
+    }
 
-            showList();
-        }
-
+    private void initList(){
+        favorites = sharedPreference.getFavorites(getContext());
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(),
                 getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 2 : 3);
         recyclerView.setLayoutManager(layoutManager);
@@ -77,8 +88,19 @@ public class FavoriteListFragment extends Fragment {
             }
         });
         recyclerView.setAdapter(mAdapter);
+    }
 
-        return view;
+    private void handleResult(){
+        if (favorites == null || favorites.isEmpty()) {
+            showNoFavsMessage();
+        } else {
+
+            if (favorites.size() == 0) {
+                showNoFavsMessage();
+            }
+
+            showList();
+        }
     }
 
     private void showList() {

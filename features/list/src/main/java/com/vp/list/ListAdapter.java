@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.vp.list.model.ListItem;
 
 import java.util.Collections;
@@ -37,6 +38,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
                     .with(holder.image)
                     .load(listItem.getPoster())
                     .override((int) (300 * density), (int) (600 * density))
+                    .setLoader(holder.image.getContext())
                     .into(holder.image);
         } else {
             holder.image.setImageResource(R.drawable.placeholder);
